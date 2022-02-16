@@ -4,7 +4,7 @@ The purpose of this docker image is to provide an image for arm64v8 (Raspberry P
 
 | Description  | Value             |
 |--------------|-------------------|
-| OS           | arm32v8           |
+| OS           | arm64v8           |
 | InfluxDB     | 2.1.1             |
 | Grafana      | 8.4.0-beta1       |
 | Telegraf     | 1.21.3            |
@@ -12,7 +12,8 @@ The purpose of this docker image is to provide an image for arm64v8 (Raspberry P
 ## Note
 
 This is a newly created repository with as base 'influxdb-grafana-telegraf', a fork of the repository created by Daniel Gomes. 
-As I have only a Raspberry Pi I can only test the image on arm64v8.
+As I have only a Raspberry Pi I can only test the image on arm64v8 (and arm32v7). 
+As InfluxDB 2.x is slightly different, so far I haven't had this working. Especially when using the upgrade-function with this image. For the upgrade-function I use the regular influxdb-image and after that I should have a 2.x-installation to continue, besides the working InfluxDB 1.x-installation. For the 2.x-installation during testing I will use different ports.
 
 ## Quick Start
 
