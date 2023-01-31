@@ -1,20 +1,20 @@
-name: Build and push latest
+name: Build and push latest Docker-Influxdb-Grafana-Telegraf image
 
 on:
-  # cron job to trigger the build on any push to master
+  # cron job to trigger the build on any push to dev
   push:
     branches:
-      - 'main'
-    #paths:
-    #  - 'one-container/pihole-unbound/VERSION'
-#  schedule:
-  # cron job to trigger the build dialy (time in UTC)
-#    - cron:  '0 4 * * *'
-
+      - 'master'
+    paths:
+      - Dockerfile
+  
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Get tag name from date
+        id: tag_date
+        run: echo "TAG_DATE=$(date +'%Y%m%d')" >>$GITHUB_ENV
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -31,8 +31,6 @@ jobs:
         name: Build and push latest
         uses: docker/build-push-action@v3
         with:
-        #  build-args: DOCKER_INFLUXDB2_VERSION=${{ steps.pihole_version.outputs.release }}
-        #  context: "{{defaultContext}}:one-container/pihole-unbound/"
           platforms: linux/arm64/v8
           push: true
-          tags: pluim003/influxdb2-grafana-telegraf:latest
+          tags: pluim003/influxdb2-grafana-telegraf:latest, pluim003/influxdb2-grafana-telegraf:${{ env.TAG_DATE }}
