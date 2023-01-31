@@ -5,9 +5,10 @@ The purpose of this docker image is to provide an image for arm64v8 (Raspberry P
 | Description  | Value             |
 |--------------|-------------------|
 | OS           | arm64v8           |
-| InfluxDB     | 2.1.1             |
-| Grafana      | 8.4.0-beta1       |
-| Telegraf     | 1.21.3            |
+| InfluxDB     | 2.6.1             |
+| InfluxCli    | 2.6.1             |
+| Grafana      | 9.3.6             |
+| Telegraf     | 1.25.0            |
 
 ## Note
 
@@ -92,7 +93,7 @@ find ${BACKUP_DIR}/${CONTAINER}cfg*  -mtime +7 -exec ls -ltr  {} \;
 ## SSH
 
 ```sh
-docker exec -it influxdb-grafana bash
+docker exec -it influxdb2-grafana bash
 ```
 
 ## Grafana
@@ -120,5 +121,5 @@ Now you are ready to add your first dashboard and launch some queries on a datab
 ### InfluxDB Shell (CLI)
 
 ```sh
-docker exec -it influxdb-grafana influx
+docker exec -it influxdb2-grafana influx
 ```
