@@ -4,7 +4,7 @@ on:
   # cron job to trigger the build on any push to dev
   push:
     branches:
-      - 'master'
+      - 'main'
     paths:
       - Dockerfile
   
