@@ -1,6 +1,5 @@
 ARG TARGETOS
 FROM arm64v8/debian:bullseye-slim as debian-arm64
-#FROM arm32v7/debian:bullseye-slim as debian-arm
 LABEL maintainer="Dick Pluim <dockerhub@dickpluim.com>"
 
 FROM debian-${TARGETARCH}
@@ -8,8 +7,8 @@ FROM debian-${TARGETARCH}
 # Default versions
 ENV INFLUXDB_VERSION=2.6.1
 ENV INFLUXCLI_VERSION=2.6.1
-ENV TELEGRAF_VERSION=1.25.3
-ENV GRAFANA_VERSION=9.4.3
+ENV TELEGRAF_VERSION=1.26.0
+ENV GRAFANA_VERSION=9.4.7
 
 ENV GF_DATABASE_TYPE=sqlite3
 
