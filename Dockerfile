@@ -57,7 +57,7 @@ RUN \
      && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf 
  # Install Grafana
  RUN \
-  apt-get install -y adduser libfontconfig1 \
+  apt-get install -y adduser libfontconfig1 musl \
      && wget https://dl.grafana.com/oss/release/grafana_${GRAFANA_VERSION}_${ARCH}.deb \
      && dpkg -i grafana_${GRAFANA_VERSION}_${ARCH}.deb && rm grafana_${GRAFANA_VERSION}_${ARCH}.deb 
  RUN \
