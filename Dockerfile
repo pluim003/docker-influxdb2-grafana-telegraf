@@ -44,23 +44,19 @@ RUN \
    # if [ "${TARGETARCH}" = "arm" ]; then ARCH="armhf"; fi && \
    # if [ "$[TARGETARCH]" = "arm64" ]; then ARCH="arm64"; fi && \
   wget https://dl.influxdata.com/influxdb/releases/influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb \
-    && dpkg -i influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb && rm influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb
+    && dpkg -i influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb && rm influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb \
 # Install InfluxCLI
-RUN \
-  wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb \
-    && dpkg -i influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb && rm influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb
+    && wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb \
+    && dpkg -i influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb && rm influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb \
 # Install Telegraf
-RUN \
- wget  https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
-     && tar -xf telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
-     && cd /telegraf-${TELEGRAF_VERSION} && cp -R * / && cd / && rm -rf telegraf-${TELEGRAF_VERSION} \
-     && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf 
+    && wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
+    && tar -xf telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
+    && cd /telegraf-${TELEGRAF_VERSION} && cp -R * / && cd / && rm -rf telegraf-${TELEGRAF_VERSION} \
+    && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf \
  # Install Grafana
- RUN \
-  apt-get install -y adduser libfontconfig1 musl \
-     && wget https://dl.grafana.com/oss/release/grafana_${GRAFANA_VERSION}_${ARCH}.deb \
-     && dpkg -i grafana_${GRAFANA_VERSION}_${ARCH}.deb && rm grafana_${GRAFANA_VERSION}_${ARCH}.deb 
- RUN \
+    && apt-get install -y adduser libfontconfig1 musl \
+    && wget https://dl.grafana.com/oss/release/grafana_${GRAFANA_VERSION}_${ARCH}.deb \
+    && dpkg -i grafana_${GRAFANA_VERSION}_${ARCH}.deb && rm grafana_${GRAFANA_VERSION}_${ARCH}.deb \
     # Cleanup
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
