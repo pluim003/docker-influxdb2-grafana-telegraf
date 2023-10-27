@@ -46,17 +46,21 @@ RUN \
   wget https://dl.influxdata.com/influxdb/releases/influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb \
     && dpkg -i influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb && rm influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb \
 # Install InfluxCLI
-  && wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb \
-    && dpkg -i influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb && rm influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb \
+RUN \
+  wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb \
+    && dpkg -i influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb && rm influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb
 # Install Telegraf
- && wget  https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
+RUN \
+ wget  https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
      && tar -xf telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
      && cd /telegraf-${TELEGRAF_VERSION} && cp -R * / && cd / && rm -rf telegraf-${TELEGRAF_VERSION} \
-     && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf \
-# Install Grafana
- && apt-get install -y adduser libfontconfig1 \
+     && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf 
+ # Install Grafana
+ RUN \
+  apt-get install -y adduser libfontconfig1 \
      && wget https://dl.grafana.com/oss/release/grafana_${GRAFANA_VERSION}_${ARCH}.deb \
-     && dpkg -i grafana_${GRAFANA_VERSION}_${ARCH}.deb && rm grafana_${GRAFANA_VERSION}_${ARCH}.deb \
+     && dpkg -i grafana_${GRAFANA_VERSION}_${ARCH}.deb && rm grafana_${GRAFANA_VERSION}_${ARCH}.deb 
+ RUN \
     # Cleanup
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
