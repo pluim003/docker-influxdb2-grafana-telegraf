@@ -44,7 +44,7 @@ RUN \
    # if [ "${TARGETARCH}" = "arm" ]; then ARCH="armhf"; fi && \
    # if [ "$[TARGETARCH]" = "arm64" ]; then ARCH="arm64"; fi && \
   wget https://dl.influxdata.com/influxdb/releases/influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb \
-    && dpkg -i influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb && rm influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb \
+    && dpkg -i influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb && rm influxdb2_${INFLUXDB_VERSION}_${ARCH}.deb
 # Install InfluxCLI
 RUN \
   wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-${ARCH}.deb \
