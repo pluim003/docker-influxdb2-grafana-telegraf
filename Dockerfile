@@ -37,6 +37,11 @@ RUN rm /var/lib/apt/lists/* -vf \
         supervisor 
 
 
+# add Influx-repos
+RUN \
+  wget -q https://repos.influxdata.com/influxdata-archive_compat.key \
+  && echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c influxdata-archive_compat.key' | sha256sum -c && cat influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null \
+  && echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main' | sudo tee /etc/apt/sources.list.d/influxdata.list
 # Install InfluxDB
 #ARG TARGETARCH
 #ARG ARCH=${TARGETARCH}
@@ -48,9 +53,12 @@ RUN \
     && cd /influxdb2-${INFLUXDB_VERSION} && cp -R * / && cd / && rm -rf influxdb2-${INFLUXDB_VERSION} 
 # Install InfluxCLI
 RUN \
-  wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
-    && gunzip influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz && tar xvf influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar -C /usr/bin && rm influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar \
-    && cd /influxdb2-client-${INFLUXCLI_VERISON} && cp influx /usr/bin && cd / && rm -rf influxdb2-client-${INFLUXCLI_VERSION}
+  # influxdata-archive_compat.key GPG fingerprint:
+  #     9D53 9D90 D332 8DC7 D6C8 D3B9 D8FF 8E1F 7DF8 B07E
+  sudo apt-get update && sudo apt-get install influxdb2-cli
+ # wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
+ #   && gunzip influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz && tar xvf influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar -C /usr/bin && rm influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar \
+ #   && cd /influxdb2-client-${INFLUXCLI_VERISON} && cp influx /usr/bin && cd / && rm -rf influxdb2-client-${INFLUXCLI_VERSION}
 # Install Telegraf
 RUN \
   wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
