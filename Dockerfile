@@ -43,11 +43,13 @@ RUN rm /var/lib/apt/lists/* -vf \
 RUN \
    # if [ "${TARGETARCH}" = "arm" ]; then ARCH="armhf"; fi && \
    # if [ "$[TARGETARCH]" = "arm64" ]; then ARCH="arm64"; fi && \
-  wget https://dl.influxdata.com/influxdb/releases/influxdb2_${INFLUXDB_VERSION}_arm64.deb \
-    && dpkg -i influxdb2_${INFLUXDB_VERSION}_arm64.deb && rm influxdb2_${INFLUXDB_VERSION}_arm64.deb \
+  wget https://dl.influxdata.com/influxdb/releases/influxdb2_${INFLUXDB_VERSION}_arm64.tar.gz \
+    && tar -xf influxdb2_${INFLUXDB_VERSION}_arm64.tar.gz -C / && rm influxdb2_${INFLUXDB_VERSION}_arm64.tar.gz \
+    && cd /influxdb2_${INFLUXDB_VERSION}_arm64.tar.gz && cp -R * / && cd / && rm -rf influxdb2_${INFLUXDB_VERSION} \
 # Install InfluxCLI
-    && wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-arm64.deb \
-    && dpkg -i influxdb2-client-${INFLUXCLI_VERSION}-arm64.deb && rm influxdb2-client-${INFLUXCLI_VERSION}-arm64.deb \
+    && wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-arm64.tar.gz \
+    && tar -xf influxdb2-client-${INFLUXCLI_VERSION}-arm64.tar.gz && rm influxdb2-client-${INFLUXCLI_VERSION}-arm64.tar.gz \
+    && cd /influxdb2-client-${INFLUXCLI_VERISON} && cp -R * / && cd / && rm -rf influxdb2-client-${INFLUXCLI_VERSION} \
 # Install Telegraf
     && wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
     && tar -xf telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
