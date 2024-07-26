@@ -43,9 +43,9 @@ RUN rm /var/lib/apt/lists/* -vf \
 RUN \
    # if [ "${TARGETARCH}" = "arm" ]; then ARCH="armhf"; fi && \
    # if [ "$[TARGETARCH]" = "arm64" ]; then ARCH="arm64"; fi && \
-  wget https://dl.influxdata.com/influxdb/releases/influxdb2_${INFLUXDB_VERSION}_linux_arm64.tar.gz \
-    && tar -xf influxdb2_${INFLUXDB_VERSION}_linux_arm64.tar.gz -C / && rm influxdb2_${INFLUXDB_VERSION}_linux_arm64.tar.gz \
-    && cd /influxdb2_${INFLUXDB_VERSION} && cp -R * / && cd / && rm -rf influxdb2_${INFLUXDB_VERSION} 
+  wget https://dl.influxdata.com/influxdb/releases/influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
+    && tar -xf influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz -C / && rm influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
+    && cd /influxdb2-${INFLUXDB_VERSION} && cp -R * / && cd / && rm -rf influxdb2-${INFLUXDB_VERSION} 
 # Install InfluxCLI
 RUN \
     && wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
