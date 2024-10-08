@@ -32,7 +32,7 @@ RUN rm /var/lib/apt/lists/* -vf \
 #        procps \
 #        vim \
 #        net-tools \
-#        wget \
+        wget \
 #        gnupg \
         supervisor 
 
