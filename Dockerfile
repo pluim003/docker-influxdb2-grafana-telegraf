@@ -61,7 +61,7 @@ RUN \
     && mv influx /usr/bin 
 # Install Telegraf
 RUN \
-  wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
+  wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
     && tar -xf telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
     && cd /telegraf-${TELEGRAF_VERSION} && cp -R * / && cd / && rm -rf telegraf-${TELEGRAF_VERSION} \
     && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf 
