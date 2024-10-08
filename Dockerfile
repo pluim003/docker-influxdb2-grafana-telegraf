@@ -23,15 +23,15 @@ RUN rm /var/lib/apt/lists/* -vf \
         apt-utils \
         ca-certificates \
 #        curl \
-#        dialog \
+        dialog \
 #        git \
         htop \
         libfontconfig1 \
-#        lsof \
+        lsof \
 #        nano \
-#        procps \
-#        vim \
-#        net-tools \
+        procps \
+        vim \
+        net-tools \
         wget \
 #        gnupg \
         supervisor 
