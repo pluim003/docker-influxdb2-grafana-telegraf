@@ -49,7 +49,8 @@ RUN \
    # if [ "$[TARGETARCH]" = "arm64" ]; then ARCH="arm64"; fi && \
   wget https://dl.influxdata.com/influxdb/releases/influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
     && tar -xf influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz -C / && rm influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
-    && cd /influxdb2-${INFLUXDB_VERSION} && cp -R * / && cd / && rm -rf influxdb2-${INFLUXDB_VERSION} 
+    && cd /influxdb2-${INFLUXDB_VERSION} && cp -R * / && cd / && rm -rf influxdb2-${INFLUXDB_VERSION} \
+    && groupadd -g 999 influxdb && useradd -ms /bin/bash -u 999 -g 999 influxdb 
 # Install InfluxCLI
 RUN \
   # influxdata-archive_compat.key GPG fingerprint:
