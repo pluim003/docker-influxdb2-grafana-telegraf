@@ -2,11 +2,11 @@ name: Build and push nightly Docker-Influxdb-Grafana-Telegraf image
 
 on:
   # cron job to trigger the build on any push to dev
-  push:
-    branches:
-      - 'main'
-    paths:
-      - Dockerfile_nightly
+ # push:
+ #   branches:
+ #     - 'main'
+ #   paths:
+ #     - Dockerfile_nightly
   workflow_dispatch:
   inputs:
     logLevel:
