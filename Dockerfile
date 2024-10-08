@@ -22,18 +22,18 @@ RUN rm /var/lib/apt/lists/* -vf \
         apt-transport-https \
         apt-utils \
         ca-certificates \
-        curl \
-        dialog \
-        git \
+#        curl \
+#        dialog \
+#        git \
         htop \
         libfontconfig1 \
-        lsof \
-        nano \
-        procps \
-        vim \
-        net-tools \
-        wget \
-        gnupg \
+#        lsof \
+#        nano \
+#        procps \
+#        vim \
+#        net-tools \
+#        wget \
+#        gnupg \
         supervisor 
 
 
