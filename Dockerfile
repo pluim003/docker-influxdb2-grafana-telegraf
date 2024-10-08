@@ -59,7 +59,11 @@ RUN \
 RUN \
   gunzip influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz && tar xvf influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar -C /usr/bin \ 
     && rm influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar 
-RUN cd /influxdb2-client-${INFLUXCLI_VERISON} && ls -l && cp influx /usr/bin && cd / && rm -rf influxdb2-client-${INFLUXCLI_VERSION}
+RUN cd /influxdb2-client-${INFLUXCLI_VERISON} 
+RUN ls -l 
+RUN cp influx /usr/bin 
+RUN cd / 
+RUN rm -rf influxdb2-client-${INFLUXCLI_VERSION}
 # Install Telegraf
 RUN \
   wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
