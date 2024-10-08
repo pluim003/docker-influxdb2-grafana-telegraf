@@ -55,15 +55,10 @@ RUN \
   # influxdata-archive_compat.key GPG fingerprint:
   #     9D53 9D90 D332 8DC7 D6C8 D3B9 D8FF 8E1F 7DF8 B07E
  # sudo apt-get update && sudo apt-get install influxdb2-cli
-  wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz
-RUN \
-  gunzip influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz && tar xvf influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar -C /usr/bin \ 
-    && rm influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar 
-RUN cd /influxdb2-client-${INFLUXCLI_VERISON} 
-RUN ls -l 
-RUN cp influx /usr/bin 
-RUN cd / 
-RUN rm -rf influxdb2-client-${INFLUXCLI_VERSION}
+  wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
+    && tar xvfz influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \ 
+    && rm influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
+    && mv influx /usr/bin 
 # Install Telegraf
 RUN \
   wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${ARCH}.tar.gz \
