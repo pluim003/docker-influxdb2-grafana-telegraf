@@ -6,6 +6,9 @@ on:
   #branches:
   #  - paths: 'Dockerfile_nightly'
   #  - 'main'
+  schedule:
+  # cron job to trigger the build dialy (time in UTC)
+    - cron:  '0 4 * * *'
   workflow_dispatch:
     inputs:
       logLevel:
@@ -51,4 +54,4 @@ jobs:
         with:
           platforms: linux/arm64/v8
           push: true
-          tags: pluim003/influxdb2-grafana-telegraf:nightly, pluim003/influxdb2-grafana-telegraf:nightly_${{ env.TAG_DATE }}
+          tags: pluim003/influxdb2-grafana-telegraf:nightly
