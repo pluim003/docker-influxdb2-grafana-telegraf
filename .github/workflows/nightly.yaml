@@ -1,4 +1,4 @@
-name: Build and push manually a nightly Docker-Influxdb-Grafana-Telegraf image
+name: Build and push a nightly Docker-Influxdb-Grafana-Telegraf image
 
 on:
   # cron job to trigger the build on any push to dev
