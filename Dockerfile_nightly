@@ -47,7 +47,7 @@ RUN wget -q https://repos.influxdata.com/influxdata-archive_compat.key
 RUN \
    # if [ "${TARGETARCH}" = "arm" ]; then ARCH="armhf"; fi && \
    # if [ "$[TARGETARCH]" = "arm64" ]; then ARCH="arm64"; fi && \
-  wget https://dl.influxdata.com/influxdb/releases/influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
+  wget https://dl.influxdata.com/influxdb/nightlies/influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
     && tar -xf influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz -C / && rm influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
     && cd /influxdb2-${INFLUXDB_VERSION} && cp -R * / && cd / && rm -rf influxdb2-${INFLUXDB_VERSION} \
     && groupadd -g 999 influxdb && useradd -ms /bin/bash -u 999 -g 999 influxdb 
@@ -62,7 +62,7 @@ RUN \
     && mv influx /usr/bin 
 # Install Telegraf
 RUN \
-  wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
+  wget https://dl.influxdata.com/telegraf/nightlies/telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
     && tar -xf telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
     && cd /telegraf-${TELEGRAF_VERSION} && cp -R * / && cd / && rm -rf telegraf-${TELEGRAF_VERSION} \
     && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf 
