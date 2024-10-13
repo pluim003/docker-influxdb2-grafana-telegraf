@@ -8,6 +8,7 @@ FROM debian-${TARGETARCH}
 ENV INFLUXDB_VERSION=nightly
 ENV INFLUXCLI_VERSION=2.7.5
 ENV TELEGRAF_VERSION=nightly
+ENV TELEGRAF_VERSION_NUMBER=1.33.0
 ENV GRAFANA_VERSION=11.2.2
 
 ENV GF_DATABASE_TYPE=sqlite3
@@ -64,7 +65,7 @@ RUN \
 RUN \
   wget https://dl.influxdata.com/telegraf/nightlies/telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
     && tar -xf telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
-    && cd /telegraf-${TELEGRAF_VERSION}_linux_arm64 && cp -R * / && cd / && rm -rf telegraf-${TELEGRAF_VERSION}_linux_arm64 \
+    && cd /telegraf-${TELEGRAF_VERSION_NUMBER} && cp -R * / && cd / && rm -rf telegraf-${TELEGRAF_VERSION_NUMBER} \
     && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf 
  # Install Grafana
  RUN \
