@@ -22,7 +22,7 @@ RUN apt-get update
 RUN apt-get install libc-bin
 
 # Clear previous sources
-RUN rm /var/lib/apt/lists/* -vf
+# RUN rm /var/lib/apt/lists/* -vf
 
     # Base dependencies
 #    && apt-get -y update \
