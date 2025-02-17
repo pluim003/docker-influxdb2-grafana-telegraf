@@ -14,13 +14,6 @@ ENV GF_DATABASE_TYPE=sqlite3
 
 WORKDIR /root
 
-# Problems with installing libc-bin
-
-RUN rm /var/lib/dpkg/info/libc-bin.*
-RUN apt-get clean
-RUN apt-get update
-RUN apt-get install libc-bin
-
 # Clear previous sources
 # RUN rm /var/lib/apt/lists/* -vf
 
@@ -39,13 +32,10 @@ RUN apt-get -y install \
 #        nano \
         procps \
         vim \
-#        net-tools \
+        net-tools \
         wget \
 #        gnupg \
         supervisor 
-
-RUN apt-get -y install net-tools
-
 
 # add Influx-repos
 RUN wget -q https://repos.influxdata.com/influxdata-archive_compat.key
