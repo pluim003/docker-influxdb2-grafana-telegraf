@@ -14,12 +14,17 @@ ENV GF_DATABASE_TYPE=sqlite3
 
 WORKDIR /root
 
+RUN rm /var/lib/dpkg/info/libc-bin.*
+RUN apt-get clean
+# RUN apt-get update
+# RUN apt-get install libc-bin
+
 # Clear previous sources
 # RUN rm /var/lib/apt/lists/* -vf
 
     # Base dependencies
-#    && apt-get -y update \
-RUN apt-get -y install \
+RUN apt-get -y update \
+        apt-get -y install \
         apt-transport-https \
         apt-utils \
         ca-certificates \
