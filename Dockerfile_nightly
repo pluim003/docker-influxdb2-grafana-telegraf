@@ -16,9 +16,9 @@ ENV GF_DATABASE_TYPE=sqlite3
 WORKDIR /root
 
 # Clear previous sources
-RUN rm /var/lib/apt/lists/* -vf \
+# RUN rm /var/lib/apt/lists/* -vf \
     # Base dependencies
-    && apt-get -y update \
+RUN apt-get -y update \
     && apt-get -y install \
         apt-transport-https \
         apt-utils \
