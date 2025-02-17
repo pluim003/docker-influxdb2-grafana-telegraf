@@ -22,10 +22,11 @@ RUN apt-get update
 RUN apt-get install libc-bin
 
 # Clear previous sources
-RUN rm /var/lib/apt/lists/* -vf \
+RUN rm /var/lib/apt/lists/* -vf
+
     # Base dependencies
-    && apt-get -y update \
-    && apt-get -y install \
+#    && apt-get -y update \
+RUN apt-get -y install \
         apt-transport-https \
         apt-utils \
         ca-certificates \
@@ -38,10 +39,12 @@ RUN rm /var/lib/apt/lists/* -vf \
 #        nano \
         procps \
         vim \
-        net-tools \
+#        net-tools \
         wget \
 #        gnupg \
         supervisor 
+
+RUN apt-get -y install net-tools
 
 
 # add Influx-repos
