@@ -32,10 +32,12 @@ RUN apt-get -y install \
 #        nano \
         procps \
         vim \
-        net-tools \
+#        net-tools \
         wget \
 #        gnupg \
         supervisor 
+        
+RUN apt-get -y install net-tools
 
 # add Influx-repos
 RUN wget -q https://repos.influxdata.com/influxdata-archive_compat.key
