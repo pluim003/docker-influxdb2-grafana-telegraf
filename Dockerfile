@@ -1,8 +1,10 @@
-ARG TARGETOS
-FROM arm64v8/debian:bullseye-slim as debian-arm64
+#ARG TARGETOS
+#FROM arm64v8/debian:bullseye-slim as debian-arm64
 LABEL maintainer="Dick Pluim <dockerhub@dickpluim.com>"
 
-FROM debian-${TARGETARCH}
+FROM debian:bullseye-slim
+
+# FROM debian-${TARGETARCH}
 
 # Default versions
 ENV INFLUXDB_VERSION=2.7.12
