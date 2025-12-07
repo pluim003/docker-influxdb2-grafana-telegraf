@@ -51,6 +51,6 @@ jobs:
         name: Build and push latest
         uses: docker/build-push-action@v3
         with:
-          platforms: linux/arm64/v8,linux/amd64
+          platforms: linux/arm64/v8
           push: true
           tags: pluim003/influxdb2-grafana-telegraf:latest, pluim003/influxdb2-grafana-telegraf:${{ env.TAG_DATE }}
