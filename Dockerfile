@@ -1,10 +1,15 @@
+FROM --platform=$BUILDPLATFORM debian:bullseye-slim AS build
+ARG TARGETARCH
+ARG BUILDPLATFORM
+RUN echo "I am running on $BUILDPLATFORM, building for $TARGETARCH" > /log
+
 #ARG TARGETOS
 #FROM arm64v8/debian:bullseye-slim as debian-arm64
 
 FROM debian:bullseye-slim
 LABEL maintainer="Dick Pluim <dockerhub@dickpluim.com>"
 
-# FROM debian-${TARGETARCH}
+FROM debian:bullseye-slim:${TARGETARCH}
 
 # Default versions
 ENV INFLUXDB_VERSION=2.7.12
@@ -59,8 +64,8 @@ RUN wget -q https://repos.influxdata.com/influxdata-archive_compat.key
 RUN \
    # if [ "${TARGETARCH}" = "arm" ]; then ARCH="armhf"; fi && \
    # if [ "$[TARGETARCH]" = "arm64" ]; then ARCH="arm64"; fi && \
-  wget https://dl.influxdata.com/influxdb/releases/v${INFLUXDB_VERSION}/influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
-    && tar -xf influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz -C / && rm influxdb2-${INFLUXDB_VERSION}_linux_arm64.tar.gz \
+  wget https://dl.influxdata.com/influxdb/releases/v${INFLUXDB_VERSION}/influxdb2-${INFLUXDB_VERSION}_linux_${TARGETARCH}.tar.gz \
+    && tar -xf influxdb2-${INFLUXDB_VERSION}_linux_${TARGETARCH}.tar.gz -C / && rm influxdb2-${INFLUXDB_VERSION}_linux_{TARGETARCH}.tar.gz \
     && cd /influxdb2-${INFLUXDB_VERSION} && cp -R * / && cd / && rm -rf influxdb2-${INFLUXDB_VERSION} \
     && groupadd -g 999 influxdb && useradd -ms /bin/bash -u 999 -g 999 influxdb 
 # Install InfluxCLI
@@ -68,14 +73,14 @@ RUN \
   # influxdata-archive_compat.key GPG fingerprint:
   #     9D53 9D90 D332 8DC7 D6C8 D3B9 D8FF 8E1F 7DF8 B07E
  # sudo apt-get update && sudo apt-get install influxdb2-cli
-  wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
-    && tar xvfz influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \ 
-    && rm influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
+  wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-linux-${TARGETARCH}.tar.gz \
+    && tar xvfz influxdb2-client-${INFLUXCLI_VERSION}-linux-${TARGETARCH}.tar.gz \ 
+    && rm influxdb2-client-${INFLUXCLI_VERSION}-linux-${TARGETARCH}.tar.gz \
     && mv influx /usr/bin 
 # Install Telegraf
 RUN \
-  wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
-    && tar -xf telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
+  wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_${TARGETARCH}.tar.gz \
+    && tar -xf telegraf-${TELEGRAF_VERSION}_linux_${TARGETARCH}.tar.gz -C / && rm telegraf-${TELEGRAF_VERSION}_linux_${TARGETARCH}.tar.gz \
     && cd /telegraf-${TELEGRAF_VERSION} && cp -R * / && cd / && rm -rf telegraf-${TELEGRAF_VERSION} \
     && groupadd -g 998 telegraf && useradd -ms /bin/bash -u 998 -g 998 telegraf 
  # Install Grafana
