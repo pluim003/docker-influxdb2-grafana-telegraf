@@ -9,7 +9,7 @@ RUN echo "I am running on $BUILDPLATFORM, building for $TARGETARCH" > /log
 FROM debian:bullseye-slim
 LABEL maintainer="Dick Pluim <dockerhub@dickpluim.com>"
 
-FROM debian:bullseye-slim:${TARGETARCH}
+#FROM debian:bullseye-slim
 
 # Default versions
 ENV INFLUXDB_VERSION=2.7.12
