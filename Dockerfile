@@ -71,8 +71,7 @@ RUN \
   wget https://dl.influxdata.com/influxdb/releases/influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
     && tar xvfz influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \ 
     && rm influxdb2-client-${INFLUXCLI_VERSION}-linux-arm64.tar.gz \
-    && mv influx /usr/bin \
-    && mv influxd /usr/bin
+    && mv influx /usr/bin 
 # Install Telegraf
 RUN \
   wget https://dl.influxdata.com/telegraf/releases/telegraf-${TELEGRAF_VERSION}_linux_arm64.tar.gz \
@@ -93,6 +92,7 @@ RUN \
 COPY supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Configure InfluxDB
+RUN mv /influxdb /usr/sbin/
 RUN mkdir -p /home/influxdb
 RUN mkdir -p /var/lib/influxdb
 RUN mkdir -p /var/lib/influxdb2
