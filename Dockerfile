@@ -92,7 +92,7 @@ RUN \
 COPY supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Configure InfluxDB
-RUN mv /influxd /usr/sbin/
+RUN mv /influxd /usr/bin/
 RUN mkdir -p /home/influxdb
 RUN mkdir -p /var/lib/influxdb
 RUN mkdir -p /var/lib/influxdb2
